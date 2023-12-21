@@ -17,11 +17,11 @@ EXECUTE PROCEDURE inicializar_saldo();
 
 CREATE OR REPLACE FUNCTION validar_pago() RETURNS TRIGGER AS $$
 DECLARE
-  saldo_actual INT;
+  saldo_actual_var INT;
 BEGIN
-  SELECT saldo_actual INTO saldo_actual FROM saldos WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
+  SELECT saldo_actual INTO saldo_actual_var FROM saldos WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
 
-  IF (NEW.valor_transaccion > saldo_actual) THEN
+  IF (NEW.valor_transaccion > saldo_actual_var) THEN
     RAISE EXCEPTION 'El valor de la transaccion es mayor al saldo actual';
   END IF;
 
@@ -39,11 +39,11 @@ EXECUTE PROCEDURE validar_pago();
 
 CREATE OR REPLACE FUNCTION actualizar_saldo() RETURNS TRIGGER AS $$
 DECLARE
-  saldo_actual INT;
+  saldo_actual_var INT;
 BEGIN
-  SELECT saldo_actual INTO saldo_actual FROM saldos WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
+  SELECT saldo_actual INTO saldo_actual_var FROM saldos WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
 
-  UPDATE saldos SET saldo_actual = saldo_actual - NEW.valor_transaccion WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
+  UPDATE saldos SET saldo_actual = saldo_actual_var - NEW.valor_transaccion WHERE codigo_contrato = NEW.codigo_contrato AND numero_cliente = NEW.numero_cliente;
 
   RETURN NEW;
 END;
