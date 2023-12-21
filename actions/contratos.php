@@ -33,3 +33,21 @@ function crearContrato($codigo_contrato, $numero_cliente, $numero_linea, $fecha_
 
   return true;
 }
+
+if (isset($_GET['numero_cliente'])) {
+  $numero_cliente = $_GET['numero_cliente'];
+
+  $query = "SELECT codigo_contrato FROM contratos WHERE numero_cliente = ?";
+  $pdo = get_pdo();
+
+  $stmt = $pdo->prepare($query);
+
+  if (!$stmt->execute([$numero_cliente])) {
+    echo "Error en la consulta";
+    die();
+  }
+
+  $contratos = $stmt->fetchAll();
+
+  echo json_encode($contratos);
+}

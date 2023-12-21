@@ -26,9 +26,7 @@ include '../actions/saldos.php';
       </div>
 
       <div id="nuevo_cliente" class="mt-2">
-        <button class="btn btn-warning">
-          <a href="crear_cliente.php" style="text-decoration: none; color:aliceblue;">Crear Cliente</a>
-        </button>
+        <a href="crear_cliente.php" style="text-decoration: none;">Crear Cliente?</a>
       </div>
       <label for="codigo_contrato" class="mt-2">
         Numero de Contrato

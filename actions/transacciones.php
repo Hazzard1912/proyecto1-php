@@ -19,3 +19,21 @@ function obtenerUltimaTransaccion($contrato)
 
   return $transaccion;
 }
+
+function crearTransaccion($numero_cliente, $codigo_contrato, $valor_transaccion)
+{
+
+  $fecha_transaccion = date("Y-m-d H:i:s");
+
+  $query = "INSERT INTO transacciones (codigo_contrato, numero_cliente, fecha_transaccion, valor_transaccion) VALUES (?, ?, ?, ?)";
+  $pdo = get_pdo();
+
+  $stmt = $pdo->prepare($query);
+
+  if (!$stmt->execute([$codigo_contrato, $numero_cliente, $fecha_transaccion, $valor_transaccion])) {
+    echo "Error en la consulta";
+    die();
+  }
+
+  return true;
+}
