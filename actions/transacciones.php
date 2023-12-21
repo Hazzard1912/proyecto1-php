@@ -1,5 +1,22 @@
 <?php
-include_once "../db/db.php";
+require_once __DIR__  . "/../db/db.php";
+
+function obtenerTransacciones()
+{
+  $query = "SELECT * FROM transacciones";
+  $pdo = get_pdo();
+
+  $stmt = $pdo->prepare($query);
+
+  if (!$stmt->execute()) {
+    echo "Error en la consulta";
+    die();
+  }
+
+  $transacciones = $stmt->fetchAll();
+
+  return $transacciones;
+}
 
 function obtenerUltimaTransaccion($contrato)
 {

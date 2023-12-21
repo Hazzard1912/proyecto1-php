@@ -16,6 +16,8 @@
 
   <main class="container mt-4">
     <h1 class="mb-4 text-center">Gestion de Clientes Empresa de Telefonía</h1>
+
+    <a href="generar_pdf.php" class="btn btn-primary pdf">Generar PDF</a>
   </main>
 </body>
 

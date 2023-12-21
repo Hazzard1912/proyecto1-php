@@ -1,5 +1,5 @@
 <?php
-include_once "../db/db.php";
+require_once __DIR__  . "/../db/db.php";
 
 function obtenerClientes()
 {
